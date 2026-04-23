@@ -5,5 +5,5 @@ import BackendSuperNova.Micro.model.Categoria;
 
 public interface CategoriaRepository extends JpaRepository<Categoria, Long> {
 
-    Categoria findByTipoCategoria(String nombre);
+    //Categoria findByNombreCategoria(String nombre);
 }
