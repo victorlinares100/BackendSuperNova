@@ -16,7 +16,7 @@ import BackendSuperNova.Micro.service.DetallePedidoService;
 import BackendSuperNova.Micro.model.DetallePedido;
 
 @RestController
-@RequestMapping("/api/v1/detalles-pedidos")
+@RequestMapping("/api/v1/detallespedidos")
 public class DetallePedidoController {
     @Autowired
     private DetallePedidoService detallePedidoService;

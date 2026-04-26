@@ -16,7 +16,7 @@ import BackendSuperNova.Micro.service.MovimientoStockService;
 import BackendSuperNova.Micro.model.MovimientoStock;
 
 @RestController
-@RequestMapping("/api/v1/movimientos-stock")
+@RequestMapping("/api/v1/movimientosStock")
 public class MovimientoStockController {
     @Autowired
     private MovimientoStockService movimientoStockService;
