@@ -20,13 +20,10 @@ public class StockController {
     @Autowired
     private StockService stockService;
 
-    @GetMapping
+   @GetMapping
     public ResponseEntity<List<Stock>> getAllStock() {
         List<Stock> stocks = stockService.findAll();
-        if (stocks.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.ok(stocks);
+        return ResponseEntity.ok(stocks);   // ← lista vacía = [] en vez de 204
     }
 
     @GetMapping("/{id}")

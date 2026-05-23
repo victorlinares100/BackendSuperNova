@@ -37,6 +37,9 @@ public class Stock {
     @Column(name = "Cantidad_Disponible")
     private Integer cantidadDisponible;
 
+    @Column(name = "stock_minimo")       
+    private Integer stockMinimo = 0; 
+
     @Column(name = "fecha_ingreso")
     private LocalDate fechaIngreso;
 
