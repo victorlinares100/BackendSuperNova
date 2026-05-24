@@ -1,5 +1,8 @@
 package BackendSuperNova.Micro.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.PrePersist;
@@ -40,6 +43,7 @@ public class Venta {
     private Double total;
 
     @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<DetalleVenta> detalles;
 
     @PrePersist

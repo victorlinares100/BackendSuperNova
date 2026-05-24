@@ -1,5 +1,7 @@
 package BackendSuperNova.Micro.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,6 +28,7 @@ public class DetalleVenta {
 
     @ManyToOne
     @JoinColumn(name = "Venta_id")
+    @JsonBackReference
     private Venta venta;
 
     @ManyToOne
