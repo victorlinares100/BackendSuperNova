@@ -9,6 +9,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,12 +27,11 @@ public class DetallePedido {
     @Column(name = "Detalle_Pedido_id")
     private Long id;
 
-    // Relación con Pedido
     @ManyToOne
     @JoinColumn(name = "Pedido_id")
+    @JsonBackReference
     private Pedido pedido;
 
-    // Relación con Producto
     @ManyToOne
     @JoinColumn(name = "Producto_id")
     private Producto producto;

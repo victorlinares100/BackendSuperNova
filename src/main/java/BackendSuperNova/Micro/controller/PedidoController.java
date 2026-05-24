@@ -25,9 +25,6 @@ public class PedidoController {
     @GetMapping
     public ResponseEntity<List<Pedido>> getAllPedido() {
         List<Pedido> pedidos = pedidoService.findAll();
-        if (pedidos.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
         return ResponseEntity.ok(pedidos);
     }
 
