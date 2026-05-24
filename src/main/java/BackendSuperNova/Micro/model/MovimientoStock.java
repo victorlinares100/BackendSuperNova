@@ -39,4 +39,7 @@ public class MovimientoStock {
 
     @Column(name = "descripcion", columnDefinition = "TEXT")
     private String descripcion;
+
+    @Column(name = "tipo_movimiento")
+    private String tipoMovimiento;
 }

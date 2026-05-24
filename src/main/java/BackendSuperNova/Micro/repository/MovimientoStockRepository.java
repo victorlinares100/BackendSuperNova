@@ -1,7 +1,7 @@
 package BackendSuperNova.Micro.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
 import BackendSuperNova.Micro.model.MovimientoStock;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MovimientoStockRepository extends JpaRepository<MovimientoStock, Long> {
 }

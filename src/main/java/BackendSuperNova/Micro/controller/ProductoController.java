@@ -25,9 +25,6 @@ public class ProductoController {
     @GetMapping
     public ResponseEntity<List<Producto>> getAllProducto() {
         List<Producto> productos = productoService.findAll();
-        if (productos.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
         return ResponseEntity.ok(productos);
     }
 

@@ -24,9 +24,6 @@ public class MovimientoStockController {
     @GetMapping
     public ResponseEntity<List<MovimientoStock>> getAllMovimientoStock() {
         List<MovimientoStock> movimientos = movimientoStockService.findAll();
-        if (movimientos.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
         return ResponseEntity.ok(movimientos);
     }
 
