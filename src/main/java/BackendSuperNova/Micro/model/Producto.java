@@ -35,7 +35,14 @@ public class Producto {
     @Column(name = "precio_venta")
     private Double precioVenta;
 
+    @Column(name = "stock_minimo")
+    private Integer stockMinimo = 0;
+
     @ManyToOne
     @JoinColumn(name = "Categoria_id")
     private Categoria categoria;
+
+    @ManyToOne
+    @JoinColumn(name = "Proveedor_id")
+    private Proveedor proveedor;
 }
