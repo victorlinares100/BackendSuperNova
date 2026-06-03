@@ -92,7 +92,7 @@ class VentaServiceTest {
         // El detalle pide 20 unidades — más de lo disponible
         DetalleVenta detalle = new DetalleVenta();
         detalle.setProducto(producto);
-        detalle.setCantidad(20);        // ← pide 20
+        detalle.setCantidad(20);        
         detalle.setPrecioUnitario(3490.0);
 
         Venta venta = new Venta();
