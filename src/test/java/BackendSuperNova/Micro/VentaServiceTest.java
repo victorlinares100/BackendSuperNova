@@ -28,7 +28,7 @@ class VentaServiceTest {
 
     @Test
     void registrarVenta_cuandoHayStock_descuentaCantidadCorrectamente() {
-    // PRUEBA 1: Venta exitosa — el stock debe bajar correctamente
+        // PRUEBA 1: Venta exitosa — el stock debe bajar correctamente
         Producto producto = new Producto();
         producto.setId(1L);
         producto.setNombre("Leche Entera 1L");
@@ -44,14 +44,15 @@ class VentaServiceTest {
         stock.setBodega(bodega);
         stock.setCantidadDisponible(50);
 
-        // El detalle de la venta pide 10 unidades a $990 c/u
+        // El detalle de la venta pide 10 unidades a $990 c/u, DE UNA BODEGA ESPECÍFICA
         DetalleVenta detalle = new DetalleVenta();
         detalle.setProducto(producto);
+        detalle.setBodega(bodega); // <-- AHORA LA BODEGA VA AQUÍ
         detalle.setCantidad(10);
         detalle.setPrecioUnitario(990.0);
 
         Venta venta = new Venta();
-        venta.setBodega(bodega);
+        // venta.setBodega(bodega); <-- ESTO YA NO EXISTE
         venta.setDetalles(List.of(detalle));
 
         when(stockRepository.findByProductoIdAndBodegaId(1L, 1L))
@@ -92,11 +93,11 @@ class VentaServiceTest {
         // El detalle pide 20 unidades — más de lo disponible
         DetalleVenta detalle = new DetalleVenta();
         detalle.setProducto(producto);
+        detalle.setBodega(bodega); // <-- AHORA LA BODEGA VA AQUÍ
         detalle.setCantidad(20);        
         detalle.setPrecioUnitario(3490.0);
 
         Venta venta = new Venta();
-        venta.setBodega(bodega);
         venta.setDetalles(List.of(detalle));
 
         when(stockRepository.findByProductoIdAndBodegaId(2L, 1L))

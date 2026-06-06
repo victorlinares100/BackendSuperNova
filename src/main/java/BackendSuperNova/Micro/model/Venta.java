@@ -31,10 +31,6 @@ public class Venta {
     @Column(name = "Venta_id")
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "Bodega_id")
-    private Bodega bodega;
-
     @Column(name = "fecha_venta")
     private LocalDateTime fechaVenta;
 

@@ -31,30 +31,35 @@ public class VentaService {
             detalle.setVenta(venta);
             total += detalle.getCantidad() * detalle.getPrecioUnitario();
 
-            // 1. Descontar stock
+            // 1. Descontar stock (AHORA BUSCA LA BODEGA DESDE EL DETALLE)
             List<Stock> stocks = stockRepository.findByProductoIdAndBodegaId(
-                detalle.getProducto().getId(), venta.getBodega().getId()
+                detalle.getProducto().getId(), 
+                detalle.getBodega().getId() // <-- CAMBIO AQUÍ
             );
+            
             if (stocks.isEmpty()) throw new RuntimeException(
-                "Sin stock para producto ID " + detalle.getProducto().getId()
+                "Sin stock para producto ID " + detalle.getProducto().getId() + " en la bodega seleccionada."
             );
 
             Stock stock = stocks.get(0);
             int nueva = stock.getCantidadDisponible() - detalle.getCantidad();
+            
             if (nueva < 0) throw new RuntimeException(
                 "Stock insuficiente para producto ID " + detalle.getProducto().getId()
             );
+            
             stock.setCantidadDisponible(nueva);
             stockRepository.save(stock);
 
-            // 2. Registrar movimiento de VENTA ← nuevo
+            // 2. Registrar movimiento de VENTA
             MovimientoStock mov = new MovimientoStock();
             mov.setStock(stock);
             mov.setCantidad(detalle.getCantidad());
             mov.setFechaMovimiento(LocalDate.now());
             mov.setTipoMovimiento("VENTA");
             mov.setDescripcion("Venta de " + detalle.getCantidad()
-                + " unidad(es) de " + stock.getProducto().getNombre());
+                + " unidad(es) de " + stock.getProducto().getNombre() 
+                + " desde " + stock.getBodega().getSucursal()); // <-- Pequeña mejora en descripción
             movimientoStockRepository.save(mov);
         }
 

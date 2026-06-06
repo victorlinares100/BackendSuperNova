@@ -34,6 +34,10 @@ public class DetalleVenta {
     @ManyToOne
     @JoinColumn(name = "Producto_id")
     private Producto producto;
+    
+    @ManyToOne
+    @JoinColumn(name = "Bodega_id")
+    private Bodega bodega;
 
     @Column(name = "cantidad")
     private Integer cantidad;

@@ -25,7 +25,7 @@ public class LoadDatabase {
             MovimientoStockRepository movimientoRepo,
             PedidoRepository pedidoRepo,
             DetallePedidoRepository detallePedidoRepo,
-            VentaRepository ventaRepo) { // ← Agregamos VentaRepository aquí
+            VentaRepository ventaRepo) {
 
         return args -> {
 
@@ -45,7 +45,7 @@ public class LoadDatabase {
                 System.out.println("Cargando proveedores...");
                 Object[][] provs = {
                     {"76.543.210-K", "Lácteos El Sol",        "+56 2 2233 4455", "ventas@elsol.cl"},
-                    {"77.123.456-3", "AquaPura S.A.",          "+56 9 8877 6655", "pedidos@aquapura.cl"},
+                    {"77.123.456-3", "AquaPura S.A.",         "+56 9 8877 6655", "pedidos@aquapura.cl"},
                     {"78.999.001-5", "Bimbo Chile",            "+56 2 2999 0011", "chile@bimbo.com"},
                     {"76.300.200-8", "Procter Chile",          "+56 2 2100 2200", "ventas@procter.cl"},
                     {"79.456.789-2", "Distribuidor Sur Ltda.", "+56 9 7766 5544", "contacto@distrsur.cl"},
@@ -184,7 +184,7 @@ public class LoadDatabase {
                 List<Proveedor> provs = proveedorRepo.findAll();
                 List<Producto>  prods = productoRepo.findAll();
 
-                // Pedido 1 — RECIBIDO
+                // Pedido 1
                 Pedido p1 = new Pedido();
                 p1.setProveedor(provs.get(0));
                 p1.setFechaEmision(LocalDate.parse("2026-05-01"));
@@ -200,7 +200,7 @@ public class LoadDatabase {
                 dp1b.setCantidadSolicitada(15); dp1b.setPrecioUnitario(new BigDecimal("3490.00"));
                 detallePedidoRepo.save(dp1b);
 
-                // Pedido 2 — RECIBIDO
+                // Pedido 2
                 Pedido p2 = new Pedido();
                 p2.setProveedor(provs.get(1));
                 p2.setFechaEmision(LocalDate.parse("2026-05-05"));
@@ -212,7 +212,7 @@ public class LoadDatabase {
                 dp2a.setCantidadSolicitada(120); dp2a.setPrecioUnitario(new BigDecimal("790.00"));
                 detallePedidoRepo.save(dp2a);
 
-                // Pedido 3 — EN CAMINO
+                // Pedido 3
                 Pedido p3 = new Pedido();
                 p3.setProveedor(provs.get(2));
                 p3.setFechaEmision(LocalDate.parse("2026-05-18"));
@@ -224,7 +224,7 @@ public class LoadDatabase {
                 dp3a.setCantidadSolicitada(20); dp3a.setPrecioUnitario(new BigDecimal("2190.00"));
                 detallePedidoRepo.save(dp3a);
 
-                // Pedido 4 — PENDIENTE
+                // Pedido 4
                 Pedido p4 = new Pedido();
                 p4.setProveedor(provs.get(3));
                 p4.setFechaEmision(LocalDate.parse("2026-05-22"));
@@ -237,7 +237,7 @@ public class LoadDatabase {
                 detallePedidoRepo.save(dp4a);
             }
 
-            // ─── 7. Ventas e Historial Diario (NUEVO BLOQUE) ───────────
+            // ─── 7. Ventas e Historial Diario ───────────────────────────
             if (ventaRepo.count() == 0) {
                 System.out.println("Cargando historial de ventas de prueba...");
 
@@ -249,58 +249,53 @@ public class LoadDatabase {
 
                 // VENTA DÍA 1: 2026-05-28
                 Venta v1 = new Venta();
-                v1.setBodega(central);
                 v1.setFechaVenta(LocalDateTime.of(2026, 5, 28, 11, 30));
-                DetalleVenta dv1_1 = new DetalleVenta(null, v1, prods.get(0), 10, prods.get(0).getPrecioVenta()); // 10 Leches
-                DetalleVenta dv1_2 = new DetalleVenta(null, v1, prods.get(3), 15, prods.get(3).getPrecioVenta()); // 15 Aguas
+                // Parámetros: id, venta, producto, bodega, cantidad, precioUnitario
+                DetalleVenta dv1_1 = new DetalleVenta(null, v1, prods.get(0), central, 10, prods.get(0).getPrecioVenta());
+                DetalleVenta dv1_2 = new DetalleVenta(null, v1, prods.get(3), central, 15, prods.get(3).getPrecioVenta());
                 v1.setDetalles(List.of(dv1_1, dv1_2));
                 v1.setTotal((10 * prods.get(0).getPrecioVenta()) + (15 * prods.get(3).getPrecioVenta()));
                 ventaRepo.save(v1);
 
-                // VENTA DÍA 2: 2026-05-29 (Suben las ventas)
+                // VENTA DÍA 2: 2026-05-29
                 Venta v2 = new Venta();
-                v2.setBodega(norte);
                 v2.setFechaVenta(LocalDateTime.of(2026, 5, 29, 16, 45));
-                DetalleVenta dv2_1 = new DetalleVenta(null, v2, prods.get(1), 8, prods.get(1).getPrecioVenta());  // 8 Quesos
-                DetalleVenta dv2_2 = new DetalleVenta(null, v2, prods.get(8), 5, prods.get(8).getPrecioVenta());  // 5 Pechugas Pollo
+                DetalleVenta dv2_1 = new DetalleVenta(null, v2, prods.get(1), norte, 8, prods.get(1).getPrecioVenta());
+                DetalleVenta dv2_2 = new DetalleVenta(null, v2, prods.get(8), norte, 5, prods.get(8).getPrecioVenta());
                 v2.setDetalles(List.of(dv2_1, dv2_2));
                 v2.setTotal((8 * prods.get(1).getPrecioVenta()) + (5 * prods.get(8).getPrecioVenta()));
                 ventaRepo.save(v2);
 
-                // VENTA DÍA 3: 2026-05-30 (Bajan un poco)
+                // VENTA DÍA 3: 2026-05-30
                 Venta v3 = new Venta();
-                v3.setBodega(central);
                 v3.setFechaVenta(LocalDateTime.of(2026, 5, 30, 10, 15));
-                DetalleVenta dv3_1 = new DetalleVenta(null, v3, prods.get(5), 12, prods.get(5).getPrecioVenta()); // 12 Bebidas Cola
+                DetalleVenta dv3_1 = new DetalleVenta(null, v3, prods.get(5), central, 12, prods.get(5).getPrecioVenta());
                 v3.setDetalles(List.of(dv3_1));
                 v3.setTotal(12 * prods.get(5).getPrecioVenta());
                 ventaRepo.save(v3);
 
-                // VENTA DÍA 4: 2026-06-01 (Inicio de mes fuerte)
+                // VENTA DÍA 4: 2026-06-01
                 Venta v4 = new Venta();
-                v4.setBodega(central);
                 v4.setFechaVenta(LocalDateTime.of(2026, 6, 1, 14, 20));
-                DetalleVenta dv4_1 = new DetalleVenta(null, v4, prods.get(11), 6, prods.get(11).getPrecioVenta()); // 6 Shampoos
-                DetalleVenta dv4_2 = new DetalleVenta(null, v4, prods.get(9), 4, prods.get(9).getPrecioVenta());   // 4 Longanizas
+                DetalleVenta dv4_1 = new DetalleVenta(null, v4, prods.get(11), central, 6, prods.get(11).getPrecioVenta());
+                DetalleVenta dv4_2 = new DetalleVenta(null, v4, prods.get(9), central, 4, prods.get(9).getPrecioVenta());
                 v4.setDetalles(List.of(dv4_1, dv4_2));
                 v4.setTotal((6 * prods.get(11).getPrecioVenta()) + (4 * prods.get(9).getPrecioVenta()));
                 ventaRepo.save(v4);
 
-                // VENTA DÍA 5: 2026-06-02 (Pico de ventas)
+                // VENTA DÍA 5: 2026-06-02
                 Venta v5 = new Venta();
-                v5.setBodega(norte);
                 v5.setFechaVenta(LocalDateTime.of(2026, 6, 2, 19, 0));
-                DetalleVenta dv5_1 = new DetalleVenta(null, v5, prods.get(8), 7, prods.get(8).getPrecioVenta());   // 7 Pechugas
-                DetalleVenta dv5_2 = new DetalleVenta(null, v5, prods.get(12), 20, prods.get(12).getPrecioVenta()); // 20 Papas Fritas
+                DetalleVenta dv5_1 = new DetalleVenta(null, v5, prods.get(8), norte, 7, prods.get(8).getPrecioVenta());
+                DetalleVenta dv5_2 = new DetalleVenta(null, v5, prods.get(12), norte, 20, prods.get(12).getPrecioVenta());
                 v5.setDetalles(List.of(dv5_1, dv5_2));
                 v5.setTotal((7 * prods.get(8).getPrecioVenta()) + (20 * prods.get(12).getPrecioVenta()));
                 ventaRepo.save(v5);
                 
-                // VENTA DÍA 6: 2026-06-03 (Hoy)
+                // VENTA DÍA 6: 2026-06-03
                 Venta v6 = new Venta();
-                v6.setBodega(central);
                 v6.setFechaVenta(LocalDateTime.of(2026, 6, 3, 12, 0));
-                DetalleVenta dv6_1 = new DetalleVenta(null, v6, prods.get(6), 5, prods.get(6).getPrecioVenta());   // 5 Panes de molde
+                DetalleVenta dv6_1 = new DetalleVenta(null, v6, prods.get(6), central, 5, prods.get(6).getPrecioVenta());
                 v6.setDetalles(List.of(dv6_1));
                 v6.setTotal(5 * prods.get(6).getPrecioVenta());
                 ventaRepo.save(v6);
