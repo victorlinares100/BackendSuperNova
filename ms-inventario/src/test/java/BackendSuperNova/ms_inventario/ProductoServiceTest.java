@@ -1,5 +1,3 @@
-package BackendSuperNova.ms_inventario;
-
 import BackendSuperNova.ms_inventario.model.Producto;
 import BackendSuperNova.ms_inventario.repository.ProductoRepository;
 import BackendSuperNova.ms_inventario.service.ProductoService;

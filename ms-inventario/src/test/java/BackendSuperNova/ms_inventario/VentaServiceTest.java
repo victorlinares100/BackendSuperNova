@@ -30,16 +30,15 @@ class VentaServiceTest {
         producto.setId(1L);
         producto.setNombre("Leche Entera 1L");
 
-        // En ms-inventario Stock usa bodegaId (Long) en vez de objeto Bodega
         Stock stock = new Stock();
         stock.setId(1L);
         stock.setProducto(producto);
-        stock.setBodegaId(1L);      // ← Long en vez de objeto Bodega
+        stock.setBodegaId(1L);     
         stock.setCantidadDisponible(50);
 
         DetalleVenta detalle = new DetalleVenta();
         detalle.setProducto(producto);
-        detalle.setBodegaId(1L);    // ← Long en vez de objeto Bodega
+        detalle.setBodegaId(1L);    
         detalle.setCantidad(10);
         detalle.setPrecioUnitario(990.0);
 

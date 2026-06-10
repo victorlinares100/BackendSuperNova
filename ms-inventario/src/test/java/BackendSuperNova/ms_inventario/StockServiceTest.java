@@ -20,7 +20,7 @@ class StockServiceTest {
 
     @Mock private StockRepository           stockRepository;
     @Mock private MovimientoStockRepository movimientoStockRepository;
-    @Mock private ProductoRepository        productoRepository; // 👈 ¡Agregamos el mock que faltaba!
+    @Mock private ProductoRepository        productoRepository; 
 
     @InjectMocks private StockService stockService;
 
@@ -34,19 +34,16 @@ class StockServiceTest {
         Stock stock = new Stock();
         stock.setId(10L);
         stock.setProducto(producto);
-        stock.setBodegaId(1L);      // Long en vez de objeto Bodega
+        stock.setBodegaId(1L);      
         stock.setCantidadDisponible(100);
 
-        // 👈 Simulamos que el ProductoRepository encuentra el producto correctamente en la línea 38
         when(productoRepository.findById(3L)).thenReturn(Optional.of(producto));
         
         when(stockRepository.save(any(Stock.class))).thenReturn(stock);
         when(stockRepository.findById(10L)).thenReturn(Optional.of(stock));
 
-        // ACT
         stockService.save(stock);
 
-        // ASSERT
         verify(movimientoStockRepository, times(1)).save(argThat(mov ->
             "ENTRADA".equals(mov.getTipoMovimiento()) &&
             mov.getCantidad() == 100
