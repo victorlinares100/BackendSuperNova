@@ -54,4 +54,33 @@ public class StockService {
     }
 
     public void delete(Long id) { stockRepository.deleteById(id); }
+
+    public Stock registrarSalida(Long stockId, Integer cantidad, String motivo) {
+        Stock stock = stockRepository.findById(stockId)
+            .orElseThrow(() -> new RuntimeException("Stock no encontrado"));
+
+        if (stock.getCantidadDisponible() < cantidad) {
+            throw new RuntimeException("Stock insuficiente para registrar la salida");
+        }
+
+        stock.setCantidadDisponible(stock.getCantidadDisponible() - cantidad);
+        Stock guardado = stockRepository.save(stock);
+
+        String nombreProducto = "—";
+        if (stock.getProducto() != null && stock.getProducto().getId() != null) {
+            nombreProducto = productoRepository.findById(stock.getProducto().getId())
+                .map(p -> p.getNombre()).orElse("—");
+        }
+
+        MovimientoStock mov = new MovimientoStock();
+        mov.setStock(guardado);
+        mov.setCantidad(cantidad);
+        mov.setFechaMovimiento(LocalDate.now());
+        mov.setTipoMovimiento("SALIDA");
+        mov.setDescripcion(motivo + " — " + cantidad + " unidad(es) de "
+            + nombreProducto + " en Bodega ID: " + guardado.getBodegaId());
+        movimientoStockRepository.save(mov);
+
+        return guardado;
+    }
 }

@@ -13,12 +13,26 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import BackendSuperNova.ms_inventario.service.StockService;
 import BackendSuperNova.ms_inventario.model.Stock;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/v1/stocks")
 public class StockController {
     @Autowired
     private StockService stockService;
+
+    @PostMapping("/{id}/salida")
+    public ResponseEntity<?> registrarSalida(
+            @PathVariable Long id,
+            @RequestParam Integer cantidad,
+            @RequestParam String motivo) {
+        try {
+            Stock resultado = stockService.registrarSalida(id, cantidad, motivo);
+            return ResponseEntity.ok(resultado);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+}
 
    @GetMapping
     public ResponseEntity<List<Stock>> getAllStock() {

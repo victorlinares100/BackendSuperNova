@@ -229,7 +229,7 @@ public class LoadDatabase {
                 detallePedidoRepo.save(dp4a);
             }
 
-            // ─── 6. Ventas (MODIFICADO CON IDs NUMÉRICOS) ──────────────────
+            // ─── 6. Ventas ──────────────────────────────────────────────────
             if (ventaRepo.count() == 0) {
                 System.out.println("Cargando historial de ventas de prueba...");
 
@@ -240,8 +240,7 @@ public class LoadDatabase {
 
                 // VENTA DÍA 1: 2026-05-28
                 Venta v1 = new Venta();
-                v1.setFechaVenta(LocalDateTime.of(2026, 5, 28, 11, 30));
-                // Parámetros: id, venta, producto, bodegaId, cantidad, precioUnitario
+                v1.setFechaVenta(LocalDateTime.of(2026, 4, 28, 11, 30));
                 DetalleVenta dv1_1 = new DetalleVenta(null, v1, prods.get(0), centralId, 10, prods.get(0).getPrecioVenta());
                 DetalleVenta dv1_2 = new DetalleVenta(null, v1, prods.get(3), centralId, 15, prods.get(3).getPrecioVenta());
                 v1.setDetalles(List.of(dv1_1, dv1_2));
@@ -250,7 +249,7 @@ public class LoadDatabase {
 
                 // VENTA DÍA 2: 2026-05-29
                 Venta v2 = new Venta();
-                v2.setFechaVenta(LocalDateTime.of(2026, 5, 29, 16, 45));
+                v2.setFechaVenta(LocalDateTime.of(2026, 4, 29, 16, 45));
                 DetalleVenta dv2_1 = new DetalleVenta(null, v2, prods.get(1), norteId, 8, prods.get(1).getPrecioVenta());
                 DetalleVenta dv2_2 = new DetalleVenta(null, v2, prods.get(8), norteId, 5, prods.get(8).getPrecioVenta());
                 v2.setDetalles(List.of(dv2_1, dv2_2));
@@ -259,7 +258,7 @@ public class LoadDatabase {
 
                 // VENTA DÍA 3: 2026-05-30
                 Venta v3 = new Venta();
-                v3.setFechaVenta(LocalDateTime.of(2026, 5, 30, 10, 15));
+                v3.setFechaVenta(LocalDateTime.of(2026, 4, 30, 10, 15));
                 DetalleVenta dv3_1 = new DetalleVenta(null, v3, prods.get(5), centralId, 12, prods.get(5).getPrecioVenta());
                 v3.setDetalles(List.of(dv3_1));
                 v3.setTotal(12 * prods.get(5).getPrecioVenta());
@@ -267,32 +266,90 @@ public class LoadDatabase {
 
                 // VENTA DÍA 4: 2026-06-01
                 Venta v4 = new Venta();
-                v4.setFechaVenta(LocalDateTime.of(2026, 6, 1, 14, 20));
+                v4.setFechaVenta(LocalDateTime.of(2026, 5, 1, 14, 20));
                 DetalleVenta dv4_1 = new DetalleVenta(null, v4, prods.get(11), centralId, 6, prods.get(11).getPrecioVenta());
-                DetalleVenta dv4_2 = new DetalleVenta(null, v4, prods.get(9), centralId, 4, prods.get(9).getPrecioVenta());
+                DetalleVenta dv4_2 = new DetalleVenta(null, v4, prods.get(9),  centralId, 4, prods.get(9).getPrecioVenta());
                 v4.setDetalles(List.of(dv4_1, dv4_2));
                 v4.setTotal((6 * prods.get(11).getPrecioVenta()) + (4 * prods.get(9).getPrecioVenta()));
                 ventaRepo.save(v4);
 
                 // VENTA DÍA 5: 2026-06-02
                 Venta v5 = new Venta();
-                v5.setFechaVenta(LocalDateTime.of(2026, 6, 2, 19, 0));
-                DetalleVenta dv5_1 = new DetalleVenta(null, v5, prods.get(8), norteId, 7, prods.get(8).getPrecioVenta());
+                v5.setFechaVenta(LocalDateTime.of(2026, 5, 2, 19, 0));
+                DetalleVenta dv5_1 = new DetalleVenta(null, v5, prods.get(8),  norteId, 7,  prods.get(8).getPrecioVenta());
                 DetalleVenta dv5_2 = new DetalleVenta(null, v5, prods.get(12), norteId, 20, prods.get(12).getPrecioVenta());
                 v5.setDetalles(List.of(dv5_1, dv5_2));
                 v5.setTotal((7 * prods.get(8).getPrecioVenta()) + (20 * prods.get(12).getPrecioVenta()));
                 ventaRepo.save(v5);
-                
+
                 // VENTA DÍA 6: 2026-06-03
                 Venta v6 = new Venta();
-                v6.setFechaVenta(LocalDateTime.of(2026, 6, 3, 12, 0));
+                v6.setFechaVenta(LocalDateTime.of(2026, 5, 3, 12, 0));
                 DetalleVenta dv6_1 = new DetalleVenta(null, v6, prods.get(6), centralId, 5, prods.get(6).getPrecioVenta());
                 v6.setDetalles(List.of(dv6_1));
                 v6.setTotal(5 * prods.get(6).getPrecioVenta());
                 ventaRepo.save(v6);
-            }
 
-            System.out.println("✓ Base de datos de Inventario lista con datos de prueba.");
+                // ─── JULIO 2026 ───────────────────────────────────────────────
+
+                // VENTA DÍA 7: 2026-07-02
+                Venta v7 = new Venta();
+                v7.setFechaVenta(LocalDateTime.of(2026, 6, 2, 9, 15));
+                DetalleVenta dv7_1 = new DetalleVenta(null, v7, prods.get(0),  centralId, 20, prods.get(0).getPrecioVenta());
+                DetalleVenta dv7_2 = new DetalleVenta(null, v7, prods.get(4),  centralId, 12, prods.get(4).getPrecioVenta());
+                v7.setDetalles(List.of(dv7_1, dv7_2));
+                v7.setTotal((20 * prods.get(0).getPrecioVenta()) + (12 * prods.get(4).getPrecioVenta()));
+                ventaRepo.save(v7);
+
+                // VENTA DÍA 8: 2026-07-05
+                Venta v8 = new Venta();
+                v8.setFechaVenta(LocalDateTime.of(2026, 6, 5, 14, 0));
+                DetalleVenta dv8_1 = new DetalleVenta(null, v8, prods.get(2),  norteId, 15, prods.get(2).getPrecioVenta());
+                DetalleVenta dv8_2 = new DetalleVenta(null, v8, prods.get(13), norteId, 10, prods.get(13).getPrecioVenta());
+                v8.setDetalles(List.of(dv8_1, dv8_2));
+                v8.setTotal((15 * prods.get(2).getPrecioVenta()) + (10 * prods.get(13).getPrecioVenta()));
+                ventaRepo.save(v8);
+
+                // VENTA DÍA 9: 2026-07-10
+                Venta v9 = new Venta();
+                v9.setFechaVenta(LocalDateTime.of(2026, 6, 10, 11, 30));
+                DetalleVenta dv9_1 = new DetalleVenta(null, v9, prods.get(7),  centralId, 18, prods.get(7).getPrecioVenta());
+                DetalleVenta dv9_2 = new DetalleVenta(null, v9, prods.get(10), centralId,  8, prods.get(10).getPrecioVenta());
+                v9.setDetalles(List.of(dv9_1, dv9_2));
+                v9.setTotal((18 * prods.get(7).getPrecioVenta()) + (8 * prods.get(10).getPrecioVenta()));
+                ventaRepo.save(v9);
+
+                // VENTA DÍA 10: 2026-07-15
+                Venta v10 = new Venta();
+                v10.setFechaVenta(LocalDateTime.of(2026, 6, 15, 17, 45));
+                DetalleVenta dv10_1 = new DetalleVenta(null, v10, prods.get(5),  norteId, 25, prods.get(5).getPrecioVenta());
+                DetalleVenta dv10_2 = new DetalleVenta(null, v10, prods.get(12), norteId, 15, prods.get(12).getPrecioVenta());
+                v10.setDetalles(List.of(dv10_1, dv10_2));
+                v10.setTotal((25 * prods.get(5).getPrecioVenta()) + (15 * prods.get(12).getPrecioVenta()));
+                ventaRepo.save(v10);
+
+                // VENTA DÍA 11: 2026-07-20
+                Venta v11 = new Venta();
+                v11.setFechaVenta(LocalDateTime.of(2026, 6, 20, 10, 0));
+                DetalleVenta dv11_1 = new DetalleVenta(null, v11, prods.get(9),  centralId, 6, prods.get(9).getPrecioVenta());
+                DetalleVenta dv11_2 = new DetalleVenta(null, v11, prods.get(11), centralId, 9, prods.get(11).getPrecioVenta());
+                DetalleVenta dv11_3 = new DetalleVenta(null, v11, prods.get(3),  centralId, 30, prods.get(3).getPrecioVenta());
+                v11.setDetalles(List.of(dv11_1, dv11_2, dv11_3));
+                v11.setTotal((6 * prods.get(9).getPrecioVenta()) + (9 * prods.get(11).getPrecioVenta()) + (30 * prods.get(3).getPrecioVenta()));
+                ventaRepo.save(v11);
+
+                // VENTA DÍA 12: 2026-07-25
+                Venta v12 = new Venta();
+                v12.setFechaVenta(LocalDateTime.of(2026, 6, 25, 16, 20));
+                DetalleVenta dv12_1 = new DetalleVenta(null, v12, prods.get(1), norteId, 10, prods.get(1).getPrecioVenta());
+                DetalleVenta dv12_2 = new DetalleVenta(null, v12, prods.get(6), norteId,  8, prods.get(6).getPrecioVenta());
+                v12.setDetalles(List.of(dv12_1, dv12_2));
+                v12.setTotal((10 * prods.get(1).getPrecioVenta()) + (8 * prods.get(6).getPrecioVenta()));
+                ventaRepo.save(v12);
+            
+
+                System.out.println("✓ Base de datos de Inventario lista con datos de prueba.");
+            }
         };
-    }
+    }    
 }
