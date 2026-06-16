@@ -37,7 +37,7 @@ public class StockController {
    @GetMapping
     public ResponseEntity<List<Stock>> getAllStock() {
         List<Stock> stocks = stockService.findAll();
-        return ResponseEntity.ok(stocks);   // ← lista vacía = [] en vez de 204
+        return ResponseEntity.ok(stocks);   
     }
 
     @GetMapping("/{id}")
