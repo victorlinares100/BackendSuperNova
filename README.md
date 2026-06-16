@@ -1,17 +1,78 @@
-﻿# BackendSuperNova 
+# MS Inventario — SuperNOVA
 
- 1. ejecutar antes el github de docker con los microservicios y la interfaz visual, link : https://github.com/victorlinares100/DockerSuperNOVA.git
+Microservicio de gestión de inventario para el sistema SuperNOVA.
+Desarrollado con Spring Boot y conectado a MariaDB mediante JPA/Hibernate.
 
- 2. Clona el repositorio de BackendSuperNova y ejecuta el archivo de MicroApplication.java para cargar los datos de LoadDatabase.java
+## Tecnologías utilizadas
 
- 3. Rutas principales de las Apis actuales : http://localhost:8080//api/v1/productos ,  http://localhost:8080//api/v1/categorias , http://localhost:8080//api/v1/proveedores , http://localhost:8080//api/v1/bodegas
-    
-4. Tecnologías Principales: 
-Framework: Spring Boot
+- Java 17
+- Spring Boot 3.4.5
+- Spring Data JPA / Hibernate
+- MariaDB
+- Lombok
+- JUnit 5 + Mockito
+- JaCoCo — cobertura de pruebas
+- Springdoc OpenAPI (Swagger)
+- Docker
 
-Lenguaje: Java 17
+## Puerto : http://localhost:8081/
 
-ORM: Spring Data JPA / Hibernate
+## Documentación de endpoints (Swagger) 
 
-Utilidades: Lombok (para reducir el código repetitivo)
+http://localhost:8081/swagger-ui/index.html
 
+## Funcionalidades
+
+- Productos — CRUD completo
+- Stock — registro por producto y bodega
+- Ventas — registro con descuento automático de stock
+- Movimientos de stock — entradas, salidas y ventas
+- Pedidos a proveedores
+- Categorías y proveedores
+
+## Estructura del proyecto
+src/
+
+├── main/java/BackendSuperNova/ms_inventario/
+
+│   ├── controller/     # Endpoints REST
+
+│   ├── service/        # Lógica de negocio
+
+│   ├── model/          # Entidades JPA
+
+│   ├── repository/     # Interfaces JpaRepository
+
+│   └── config/         # Carga inicial de datos
+
+└── test/               # Pruebas unitarias con Mockito
+
+## Requisitos previos
+
+- Java 17
+- Maven
+- MariaDB corriendo en puerto 3307
+
+## Ejecutar en local
+
+```bash
+./mvnw spring-boot:run
+```
+
+## Ejecutar pruebas unitarias
+
+```bash
+./mvnw clean test
+```
+
+## Generar reporte de cobertura JaCoCo
+
+```bash
+./mvnw clean test
+```
+
+El reporte queda en:target/site/jacoco/index.html
+## Cobertura actual
+
+- Cobertura total: 83%
+- Herramienta: JaCoCo 0.8.12
