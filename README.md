@@ -33,19 +33,13 @@ http://localhost:8081/swagger-ui/index.html
 ## Estructura del proyecto
 src/
 
-├── main/java/BackendSuperNova/ms_inventario/
-
-│   ├── controller/     # Endpoints REST
-
-│   ├── service/        # Lógica de negocio
-
-│   ├── model/          # Entidades JPA
-
-│   ├── repository/     # Interfaces JpaRepository
-
-│   └── config/         # Carga inicial de datos
-
-└── test/               # Pruebas unitarias con Mockito
+── main/java/BackendSuperNova/ms_inventario/
+── controller/     # Endpoints REST
+── service/        # Lógica de negocio
+── model/          # Entidades JPA
+── repository/     # Interfaces JpaRepository
+── config/         # Carga inicial de datos
+── test/               # Pruebas unitarias con Mockito
 
 ## Requisitos previos
 
@@ -76,3 +70,28 @@ El reporte queda en:target/site/jacoco/index.html
 
 - Cobertura total: 83%
 - Herramienta: JaCoCo 0.8.12
+
+# MS Clientes — SuperNOVA
+
+## Puerto http://localhost:8082/
+
+## Documentación de endpoints (Swagger) 
+http://localhost:8082/swagger-ui/index.html
+
+## Funcionalidades
+
+- Solicitudes de clientes — consultas, reclamos y sugerencias
+- Bodegas — gestión de ubicaciones del supermercado
+
+## Estructura del proyecto 
+src/
+
+── main/java/BackendSuperNova/ms_cliente/
+── controller/     # Endpoints REST
+── service/        # Lógica de negocio
+── model/          # Entidades JPA
+── repository/     # Interfaces JpaRepository
+── config/         # Carga inicial de datos
+── test/           # Pruebas unitarias
+
+# La ejecucion es exactamente la misma que el MS-inventario 
