@@ -10,7 +10,7 @@ Desarrollado con Spring Boot y conectado a MariaDB mediante JPA/Hibernate.
 - Spring Data JPA / Hibernate
 - MariaDB
 - Lombok
-- JUnit 5 + Mockito
+- JUnit 5 y Mockito
 - JaCoCo — cobertura de pruebas
 - Springdoc OpenAPI (Swagger)
 - Docker
@@ -33,13 +33,19 @@ http://localhost:8081/swagger-ui/index.html
 ## Estructura del proyecto
 src/
 
-── main/java/BackendSuperNova/ms_inventario/
-── controller/     # Endpoints REST
-── service/        # Lógica de negocio
-── model/          # Entidades JPA
-── repository/     # Interfaces JpaRepository
-── config/         # Carga inicial de datos
-── test/               # Pruebas unitarias con Mockito
+─ main/java/BackendSuperNova/ms_inventario/
+
+─ controller/     # Endpoints REST
+
+─ service/        # Lógica de negocio
+
+─ model/          # Entidades JPA
+
+─ repository/     # Interfaces JpaRepository
+
+─ config/         # Carga inicial de datos
+
+─ test/               # Pruebas unitarias con Mockito
 
 ## Requisitos previos
 
@@ -86,12 +92,18 @@ http://localhost:8082/swagger-ui/index.html
 ## Estructura del proyecto 
 src/
 
-── main/java/BackendSuperNova/ms_cliente/
-── controller/     # Endpoints REST
-── service/        # Lógica de negocio
-── model/          # Entidades JPA
-── repository/     # Interfaces JpaRepository
-── config/         # Carga inicial de datos
-── test/           # Pruebas unitarias
+─ main/java/BackendSuperNova/ms_cliente/
 
-# La ejecucion es exactamente la misma que el MS-inventario 
+─ controller/     # Endpoints REST
+
+─ service/        # Lógica de negocio
+
+─ model/          # Entidades JPA
+
+─ repository/     # Interfaces JpaRepository
+
+─ config/         # Carga inicial de datos  
+
+─ test/           # Pruebas unitarias
+
+# La ejecucion es exactamente la misma que el         MS-inventario 
